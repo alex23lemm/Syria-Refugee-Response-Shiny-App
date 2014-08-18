@@ -1,0 +1,3 @@
+country_url: http://data.unhcr.org/api/population/get_countries.json?instance_id=syria
+regional_url: http://data.unhcr.org/api/population/get_regions.json?instance_id=syria
+
