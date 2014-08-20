@@ -1,7 +1,13 @@
+# Load libraries ---------------------------------------------------------------
+
 library(jsonlite)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
+library(RColorBrewer)
 
+
+# Define functions -------------------------------------------------------------
 
 get_UNHCR_population_data <- function(url, regions = FALSE) {
   
