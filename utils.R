@@ -1,7 +1,7 @@
 library(jsonlite)
 library(dplyr)
 
-url <- config$country_url
+
 
 get_country_data <- function(url) {
   
@@ -13,9 +13,12 @@ get_country_data <- function(url) {
                                        function(e) e[["value"]][2] %>% as.numeric)
   persons_awaiting_registration <- sapply(raw_data$population,
                                           function(e) e[["value"]][3] %>% as.numeric)
-  
+  demography <- sapply(raw_data$population,
+                       function(e) unlist(e[['demography']][2, ])) %>%
+    t %>%  apply(2, as.numeric) %>%
+      
   processed_data <- raw_data %>% 
-    select(name, country, latitude, longitude) %>%
+    select(name, latitude, longitude) %>%
     mutate(
       latitude = as.numeric(latitude),
       longitude = as.numeric(longitude),
@@ -23,6 +26,8 @@ get_country_data <- function(url) {
       registered_syrian_refugees,
       persons_awaiting_registration
     ) 
+  
+  processed_data <- cbind(processed_data, demography)
       
   return(processed_data)
   
