@@ -1,6 +1,7 @@
 # Load libraries ---------------------------------------------------------------
 
 library(jsonlite)
+library(plyr)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -73,17 +74,34 @@ tidy_demographic_data <- function(demographic_data) {
 create_pyramid_plot <- function(demographic_data, country_name) {
   
   demographic_data <- demographic_data %>% filter(name == country_name)
+  y_max <- max(demographic_data$percent) %>% round_any(10, f = ceiling)
+  
   
   g <- ggplot(demographic_data, aes(age, percent, fill = gender)) +
     geom_bar(data = filter(demographic_data, gender == 'M'), stat = 'identity') +
     geom_bar(aes(y = percent * -1), filter(demographic_data, gender == 'F'), 
              stat = 'identity') +
-    geom_text(aes(label = percent), filter(demographic_data, gender == 'M')) +
-    geom_text(aes(label = percent, y = percent * -1), filter(demographic_data, 
-                                                             gender == 'F')) +
+    geom_text(aes(label = paste(percent, "%")), hjust = -0.1, size = 4,
+              filter(demographic_data, gender == 'M')) +
+    geom_text(aes(label = paste(percent, "%"), y = percent * -1), hjust = 1.1,
+              size = 4, filter(demographic_data, gender == 'F')) +
     coord_flip() +
+    xlab('Age group') +
+    ylab('Percent in each age group') +
+    scale_fill_brewer(name = 'Gender', labels = c('Female', 'Male'), 
+                      palette = 'Set1') +
+    scale_y_continuous(breaks = seq(y_max * -1, y_max, 10),
+                       labels = abs(seq(y_max * -1, y_max, 10)),
+                       limits = c((y_max * -1) - 4, y_max + 4)) +
     theme_bw() +
-    scale_fill_brewer(palette = 'Set1')
+    theme(
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank(),
+      axis.line = element_line(),
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 15)
+      )
   
   return(g)
 }
