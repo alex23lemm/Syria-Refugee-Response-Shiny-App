@@ -78,13 +78,14 @@ create_pyramid_plot <- function(demographic_data, country_name) {
   
   
   g <- ggplot(demographic_data, aes(age, percent, fill = gender)) +
-    geom_bar(data = filter(demographic_data, gender == 'M'), stat = 'identity') +
+    geom_bar(data = filter(demographic_data, gender == 'M'), stat = 'identity',
+             width = 0.6, position = position_dodge(width=0.5)) +
     geom_bar(aes(y = percent * -1), filter(demographic_data, gender == 'F'), 
-             stat = 'identity') +
-    geom_text(aes(label = paste(percent, "%")), hjust = -0.1, size = 4,
+             stat = 'identity', width = 0.6, position = position_dodge(width=0.5)) +
+    geom_text(aes(label = paste(percent, "%")), hjust = -0.1, size = 3,
               filter(demographic_data, gender == 'M')) +
     geom_text(aes(label = paste(percent, "%"), y = percent * -1), hjust = 1.1,
-              size = 4, filter(demographic_data, gender == 'F')) +
+              size = 3, filter(demographic_data, gender == 'F')) +
     coord_flip() +
     xlab('Age group') +
     ylab('Percent in each age group') +
@@ -92,15 +93,14 @@ create_pyramid_plot <- function(demographic_data, country_name) {
                       palette = 'Set1') +
     scale_y_continuous(breaks = seq(y_max * -1, y_max, 10),
                        labels = abs(seq(y_max * -1, y_max, 10)),
-                       limits = c((y_max * -1) - 4, y_max + 4)) +
-    theme_bw() +
+                       limits = c((y_max * -1) - 1, y_max + 1)) +
     theme(
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      panel.border = element_blank(),
-      axis.line = element_line(),
-      axis.text = element_text(size = 12),
-      axis.title = element_text(size = 15)
+      panel.grid.major = element_blank()
+      #panel.grid.minor = element_blank(),
+     #panel.border = element_blank(),
+      #axis.line = element_line(),
+      #axis.text = element_text(size = 12),
+      #axis.title = element_text(size = 15)
       )
   
   return(g)
