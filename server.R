@@ -5,20 +5,23 @@ library(shiny)
 library(yaml)
 
 source('utils.R')
-source('downloaded_data.R')
 config <- yaml.load_file('config.yml')
 
 
 shinyServer(function(input, output, session) {
   
+  
   source('downloaded_data.R', local = TRUE)
   
+  
+  #Turn sourced variables into reactive variables
   makeReactiveBinding('unhcr_data')
   makeReactiveBinding('demographic_data')
   makeReactiveBinding('date_downloaded')
   
-  source('downloaded_data.R')
   
+  # In every session the dumped data is shown intitally. When the user clicks 
+  # on the action button new data will be downloaded from the UN servers
   observe({
     if(input$downloadButton == 0)
       return()
@@ -39,7 +42,45 @@ shinyServer(function(input, output, session) {
     create_pyramid_plot(demographic_data, input$country_name)
   })
   
+  
+  # Create the map; this is not the "real" map, but rather a proxy
+  # object that controls the leaflet map on the web page
   map <- createLeafletMap(session, 'map')
+  
+  # session$onFlushed is necessary to work around a bug in the Shiny/Leaflet
+  # integration; without it, the addCircle commands arrive in the browser
+  # before the map is created
+  session$onFlushed(once=TRUE, function() {
+    observe({
+      map$addCircle(unhcr_data$latitude, unhcr_data$longitude, 
+                    100000, unhcr_data$name, list(weight=1.2, 
+                                                  fill=TRUE, 
+                                                  color='#4A9')
+      )
+    })
+  })
+  
+  
+  observe({
+    event <- input$map_shape_click
+    if(is.null(event))
+      return()
+    
+    map$clearPopups()
+    
+    isolate({
+      country <- filter(unhcr_data, name == event$id)
+      content <- as.character(tagList(
+        tags$strong(country$name)
+        ))
+      map$showPopup(event$lat, event$lng, content, event$id)
+    })
+  })
+  
+  
+  
+  
+  
   
 
 })
