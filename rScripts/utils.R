@@ -42,7 +42,8 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
       longitude = as.numeric(longitude),
       people_of_concern,
       registered_syrian_refugees,
-      persons_awaiting_registration
+      persons_awaiting_registration,
+      radius = round(people_of_concern / sum(people_of_concern) * 600000)
     ) 
   
   processed_data <- cbind(processed_data, demography)
