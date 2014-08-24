@@ -87,8 +87,12 @@ shinyServer(function(input, output, session) {
   # before the map is created
   session$onFlushed(once=TRUE, function() {
     observe({
-      map$addCircle(unhcr_data$latitude, unhcr_data$longitude, 
-                    100000, unhcr_data$name, list(weight=1.2, 
+      # Clear existing circles before drawing
+      map$clearShapes()
+      
+      circle_data <- unhcr_data %>% filter(name != 'Entire Region')
+      map$addCircle(circle_data$latitude, circle_data$longitude, 
+                    circle_data$radius, circle_data$name, list(weight=1.2, 
                                                   fill=TRUE, 
                                                   color='#4A9')
       )
