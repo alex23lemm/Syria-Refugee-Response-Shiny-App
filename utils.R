@@ -14,6 +14,10 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   
   raw_data <- fromJSON(url)
   
+  # Always exclude the general North Africa record because it does not provide
+  # any summary statistic
+  raw_data <- raw_data %>% filter(name != 'North Africa')
+  
   people_of_concern <- sapply(raw_data$population, 
                               function(e) e[["value"]][1] %>% as.numeric)
   registered_syrian_refugees <- sapply(raw_data$population, 
@@ -45,6 +49,16 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   
   if(regions)
     processed_data <- filter(processed_data, country != name)
+  
+  summary_data <- data.frame(name="Entire Region", 
+                             t(colSums(processed_data[,-1], na.rm = TRUE)),
+                                        stringsAsFactors = FALSE)
+  names(summary_data) <- names(processed_data)
+  summary_data$latitude <- NA
+  summary_data$longitude <- NA
+  
+  processed_data <- rbind(processed_data, summary_data)
+
      
   return(processed_data) 
 }
