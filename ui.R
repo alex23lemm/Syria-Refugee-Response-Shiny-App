@@ -33,7 +33,7 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
              actionButton('downloadButton', 'Refresh data', 
                           icon("cloud-download")),
              helpText('Info: Clicking the button will download new data 
-                      from the United Nations servers.')
+                      from the United Nations servers to the Shiny server.')
              
       ),
       
