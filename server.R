@@ -68,7 +68,16 @@ shinyServer(function(input, output, session) {
     })
   })
   
+  # Observer for handling click event on empty map/on areas with no circles
+  observe({
+    if (is.null(input$map_click))
+      return()
+    # Set the reactive variable to 'Entire region' so that reactive
+    # functions downstream can re-calculate
+    selectedCountry <<- 'Entire Region'
+  })
   
+  # Observer for handling click event on circles
   observe({
     event <- input$map_shape_click
     if(is.null(event))
@@ -78,6 +87,8 @@ shinyServer(function(input, output, session) {
     
     isolate({
       country <- filter(unhcr_data, name == event$id)
+      # Set the reactive variable to the selected country so that reactive
+      # functions downstream can re-calculate
       selectedCountry <<- country$name
       content <- as.character(tagList(
         tags$strong(country$name)
