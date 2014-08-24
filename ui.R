@@ -20,21 +20,27 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
      fluidRow(
        column(8, offset = 3,
          h2('Syrian Refugees in the Middle East'),
-         p(tags$i(class = 'icon-time'), 'Data last updated on:', textOutput('date')),
-         actionButton('downloadButton', 'Refresh data')
+         hr()
+         
          
        )
      ),
     
     fluidRow(
-      column(4,
-        selectInput('country_name', label = 'test', choices = list('Turkey', 'Lebanon',
-                                                                   'Iraq', 'Jordan', 'Egypt'), 
-                    selected = 'Turkey')     
+      column(3,
+             p(tags$i(class = 'icon-time'), 'Data last updated on:', textOutput('date')),
+             actionButton('downloadButton', 'Refresh data')
              
       ),
-      column(8,
-        plotOutput('pyramid_plot', width='70%', height='280px')
+      
+      column(4,
+        'Basic refugee information for '
+             
+      ),
+      
+      column(5,
+        textOutput('pyramidPlotLabel'),
+        plotOutput('pyramid_plot',  width='100%', height='250px')
       )
     )
     
