@@ -50,7 +50,6 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
 }
 
 
-
 tidy_demographic_data <- function(demographic_data) {
   
   demographic_data <- demographic_data %>% 
@@ -96,11 +95,6 @@ create_pyramid_plot <- function(demographic_data, country_name) {
                        limits = c((y_max * -1) - 1, y_max + 1)) +
     theme(
       panel.grid.major = element_blank()
-      #panel.grid.minor = element_blank(),
-     #panel.border = element_blank(),
-      #axis.line = element_line(),
-      #axis.text = element_text(size = 12),
-      #axis.title = element_text(size = 15)
       )
   
   return(g)
