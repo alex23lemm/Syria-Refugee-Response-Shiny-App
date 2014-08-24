@@ -75,7 +75,19 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
     
   ),
   
-  tabPanel('About'
+  tabPanel('About',
+    fluidRow(
+      column(5, offset = 5,
+             img(src = 'all_logos.png', height = 300, width = 300)
+             )
+      
+      ),
+    fluidRow(
+      column(6, offset = 2,
+             includeMarkdown('about.md'))
+      )
+           
+           
     
   )
      
