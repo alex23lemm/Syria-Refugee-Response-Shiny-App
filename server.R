@@ -4,7 +4,7 @@
 library(shiny)
 library(yaml)
 
-source('utils.R')
+source('rScripts/utils.R')
 config <- yaml.load_file('config.yml')
 
 
@@ -13,7 +13,7 @@ config <- yaml.load_file('config.yml')
 shinyServer(function(input, output, session) {
   
   
-  source('downloaded_data.R', local = TRUE)
+  source('data/downloaded_data.R', local = TRUE)
   
   # Create new reactive variable
   selectedCountry <- 'Entire Region'
