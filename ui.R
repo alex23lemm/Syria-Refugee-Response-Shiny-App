@@ -26,7 +26,7 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
         the current Syrian refugee crisis.'),
       p('Clicking on one of the circles will show you country-specific data below. The bigger
         the circle radius the more refugees are residing in the respecitve country. If you
-        would like to get back the general view of the entire region, just click on a 
+        would like to get back to the general view of the entire region, just click on a 
         non-circle area.'), 
       p('This app comes with a pre-installed data set. Clicking the button on the left will
         download new data from the United Nations servers.')
