@@ -17,6 +17,24 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
       )
      ),
     
+    absolutePanel(id = "controls", class = "modal", fixed = FALSE, draggable = FALSE,
+                  top = 60, left = "auto", right = 20, bottom = "auto",
+                  width = 280, height = "auto",
+                  
+      h3("Instructions"),
+      p('This Shiny app provides basic visualizations and summary stats about 
+        the current Syrian refugee crisis.'),
+      p('Clicking on one of the circles will show you country-specific data below. The bigger
+        the circle radius the more refugees are residing in the respecitve country. If you
+        would like to get back the general view of the entire region, just click on a 
+        non-circle area.'), 
+      p('This app comes with a pre-installed data set. Clicking the button on the left will
+        download new data from the United Nations servers.')
+    ),
+    
+    
+    
+    
      fluidRow(
        column(8, offset = 3,
          h2('Syrian Refugees in the Middle East'),
@@ -33,7 +51,8 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
              actionButton('downloadButton', 'Refresh data', 
                           icon("cloud-download")),
              helpText('Info: Clicking the button will download new data 
-                      from the United Nations servers to the Shiny server.')
+                      from the United Nations servers to the Shiny server for the active
+                      user session.')
              
       ),
       
