@@ -29,7 +29,11 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
     fluidRow(
       column(3,
              p(tags$i(class = 'icon-time'), 'Data last updated on:', textOutput('date')),
-             actionButton('downloadButton', 'Refresh data')
+             br(),
+             actionButton('downloadButton', 'Refresh data', 
+                          icon("cloud-download")),
+             helpText('Info: Clicking the button will download new data 
+                      from the United Nations servers.')
              
       ),
       
