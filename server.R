@@ -8,13 +8,15 @@ source('utils.R')
 config <- yaml.load_file('config.yml')
 
 
+# Define server-side logic of the Shiny app ------------------------------------
+
 shinyServer(function(input, output, session) {
   
   
   source('downloaded_data.R', local = TRUE)
   
   # Create new reactive variable
-  selectedCountry <- 'Turkey'
+  selectedCountry <- 'Entire Region'
   makeReactiveBinding('selectedCountry')
   
   
@@ -40,13 +42,38 @@ shinyServer(function(input, output, session) {
     date_downloaded
   })
   
+  output$summaryInformationTitle <- renderText({
+    paste('Basic refugee information for', selectedCountry)
+  })
+  
+  output$peopleOfConcern <- renderText({
+    paste('Total people of concern:',
+          unhcr_data %>% 
+            filter(name == selectedCountry) %>% 
+            select(people_of_concern))
+  })
+  
+  output$registeredRefugees <- renderText({
+    paste('Registered Syrian refugees:',
+          unhcr_data %>% 
+            filter(name == selectedCountry) %>% 
+            select(registered_syrian_refugees))
+  })
+  
+  output$peopleAwaitingRegistration <- renderText({
+    paste('Persons awaiting registration:',
+          unhcr_data %>% 
+            filter(name == selectedCountry) %>% 
+            select(persons_awaiting_registration))
+  })
+  
   output$pyramidPlotLabel <- renderText({
     paste('Demographic refugee breakdown for', selectedCountry)
     
   })
   
   
-  output$pyramid_plot <- renderPlot({
+  output$pyramidPlot <- renderPlot({
     create_pyramid_plot(demographic_data, selectedCountry)
   })
   
@@ -91,16 +118,12 @@ shinyServer(function(input, output, session) {
       # functions downstream can re-calculate
       selectedCountry <<- country$name
       content <- as.character(tagList(
-        tags$strong(country$name)
+        tags$strong(country$name),
+        tags$br(),
+        "Check out the country-specific data below"
         ))
       map$showPopup(event$lat, event$lng, content, event$id)
     })
   })
   
-  
-  
-  
-  
-  
-
 })

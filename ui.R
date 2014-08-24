@@ -34,13 +34,17 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
       ),
       
       column(4,
-        'Basic refugee information for '
+        h4(textOutput('summaryInformationTitle')),
+        br(),
+        textOutput('peopleOfConcern'),
+        textOutput('registeredRefugees'),
+        textOutput('peopleAwaitingRegistration')
              
       ),
       
       column(5,
-        textOutput('pyramidPlotLabel'),
-        plotOutput('pyramid_plot',  width='100%', height='250px')
+        h4(textOutput('pyramidPlotLabel')),
+        plotOutput('pyramidPlot',  width='100%', height='250px')
       )
     )
     
@@ -51,7 +55,5 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
   tabPanel('About'
     
   )
-    
-
-  
+     
   ))
