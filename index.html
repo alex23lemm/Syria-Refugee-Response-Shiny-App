@@ -4,7 +4,7 @@
   <title>Syria Refugee Dashboard</title>
   <meta charset="utf-8">
   <meta name="description" content="Syria Refugee Dashboard">
-  <meta name="author" content="Alexander Lemm">
+  <meta name="author" content="alex23lemm (GitHub, Twitter, Gmail)">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -31,10 +31,13 @@
     
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/ddp_logo.png">
+  </aside>
   <hgroup class="auto-fadein">
     <h1>Syria Refugee Dashboard</h1>
     <h2>Another way to visualize the current crisis</h2>
-    <p>Alexander Lemm<br/></p>
+    <p>alex23lemm (GitHub, Twitter, Gmail)<br/>Final project for Coursera's Developing Data Products class</p>
   </hgroup>
   <article></article>  
 </slide>
@@ -79,12 +82,12 @@
 
 <slide class="" id="slide-3" style="background:;">
   <hgroup>
-    <h2>Visualizing demographic data</h2>
+    <h2>Discussing one feature in more detail</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>The pyramid plot was implemented using ggplot2 and is part of <code>utils.R</code> and can easily be modified to re-use it in other projects</li>
-<li>The basic idea was to plot to different bar plots at the same time (Don&#39;t run example below)</li>
+<li><p>The pyramid plot was implemented using ggplot2 and is part of <code>utils.R</code> and can easily be modified to re-use it in other projects</p></li>
+<li><p>The basic idea was to plot to different bar plots at the same time (Don&#39;t run example below)</p></li>
 </ul>
 
 <pre><code class="r">demographic_data &lt;- demographic_data %&gt;% filter(name == country_name)  
@@ -144,7 +147,7 @@ limits = c((y_max * -1) - 1, y_max + 1))
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Visualizing demographic data'>
+        data-slide=3 title='Discussing one feature in more detail'>
          3
       </a>
     </li>
