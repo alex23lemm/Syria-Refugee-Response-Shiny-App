@@ -1,8 +1,9 @@
 ---
 title       : Syria Refugee Dashboard
 subtitle    : Another way to visualize the current crisis
-author      : Alexander Lemm
-job         : 
+author      : alex23lemm (GitHub, Twitter, Gmail)
+job         : Final project for Coursera's Developing Data Products class
+logo        : ddp_logo.png
 framework   : io2012      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : monokai      # 
@@ -37,7 +38,7 @@ Re-engineered Shiny app:
 
 ---
 
-## Visualizing demographic data
+## One feature in more detail
 
 * The pyramid plot was implemented using ggplot2 and is part of `utils.R` and can easily be modified to re-use it in other projects
 * The basic idea was to plot to different bar plots at the same time (Don't run example below)
