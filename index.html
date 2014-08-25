@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Syria Refugee Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Syria Refugee Dashboard">
+  <meta name="author" content="Alexander Lemm">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/monokai.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Syria Refugee Dashboard</h1>
+    <h2>Another way to visualize the current crisis</h2>
+    <p>Alexander Lemm<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The <code>Syria Refugee Dashboard</code> is a re-engineered version of the <a href="http://data.unhcr.org/syrianrefugees/regional.php">Syria Regional Refugee Response Portal</a> originally provided by the UN Refugee Agency (UNHCR) based on <a href="http://www.r-project.org/">R</a>, <a href="http://http://shiny.rstudio.com/">Shiny</a>, and <a href="http://leafletjs.com/">Leaflet</a>.</p>
+
+<p>Original UN web application:</p>
+
+<p><img src="./images/united_nations_app.png" alt="Alt text"></p>
+
+<p>Re-engineered Shiny app:</p>
+
+<p><img src="./images/shiny_app.png" alt="Alt text"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Benefits &amp; Features</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><strong>Increased perception</strong> : Covers an important world topic from a data perspective</li>
+<li><strong>Up-to-date R technology</strong>: Uses a bunch of packages from the &#39;Hadleyverse&#39; (<code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>) and other modern libraries like <code>jsonlite</code> and <code>leaflet</code></li>
+<li><strong>Most current data</strong>: Refreshes the data any time you want by leveraging the United Nations JSON API</li>
+<li><strong>Visualizes demographic data</strong>: Provides a light-weight ggplot2-based pyramid plot which can be re-used in other projects</li>
+<li><strong>Easily extendible:</strong> Although overall country data is accessible via the UI, all backend functionality to retrieve regional data is already implemented</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Visualizing demographic data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>The pyramid plot was implemented using ggplot2 and is part of <code>utils.R</code> and can easily be modified to re-use it in other projects</li>
+<li>The basic idea was to plot to different bar plots at the same time (Don&#39;t run example below)</li>
+</ul>
+
+<pre><code class="r">demographic_data &lt;- demographic_data %&gt;% filter(name == country_name)  
+y_max &lt;- max(demographic_data$percent) %&gt;% round_any(10, f = ceiling)
+
+g &lt;- ggplot(demographic_data, aes(age, percent, fill = gender)) +
+geom_bar(data = filter(demographic_data, gender == &#39;M&#39;), stat = &#39;identity&#39;)) +
+geom_bar(aes(y = percent * -1), filter(demographic_data, gender == &#39;F&#39;),
+stat = &#39;identity&#39;) +
+coord_flip() +
+scale_y_continuous(breaks = seq(y_max * -1, y_max, 10),
+labels = abs(seq(y_max * -1, y_max, 10)),
+limits = c((y_max * -1) - 1, y_max + 1))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Outlook and issues</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>What can be done in the future?</h3>
+
+<ul>
+<li>A later version of the <code>Syria Refugee Dashboard</code> might include country-specific maps to show regional/federal state-specific refugee data</li>
+</ul>
+
+<h3>What are the current issues?</h3>
+
+<ul>
+<li>Joe Cheng&#39;s <code>leaflet</code> package lacks documenation and was very hard to use the first time</li>
+<li>The current data retrieval process does not include exception handling: Currently, the app relies on the fact that the United Nations severs are up 24/7<br></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Overview'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Benefits &amp; Features'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Visualizing demographic data'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Outlook and issues'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
