@@ -1,22 +1,18 @@
 ---
-
 title       : Syria Refugee Dashboard
 subtitle    : Another way to visualize the current crisis
 author      : alex23lemm (GitHub, Twitter, Gmail)
 job         : Final project for Coursera's Developing Data Products class
 logo        : ddp_logo.png
-framework   : io2012   # {io2012, html5slides, shower, dzslides, ...}
+framework   : io2012      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : monokai      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
-
-
 ---
 
 ## Overview
-
 
 The `Syria Refugee Dashboard` is a re-engineered version of the [Syria Regional Refugee Response Portal](http://data.unhcr.org/syrianrefugees/regional.php) originally provided by the UN Refugee Agency (UNHCR) based on [R](http://www.r-project.org/), [Shiny](http://http://shiny.rstudio.com/), and [Leaflet](http://leafletjs.com/).
 
@@ -30,8 +26,6 @@ Re-engineered Shiny app:
 
 ![Alt text](./images/shiny_app.png)
 
-
-
 --- .class #id 
 
 ## Benefits & Features
@@ -44,12 +38,11 @@ Re-engineered Shiny app:
 
 ---
 
-## Discussing one feature in more detail
+## One feature in more detail
 
-
-* The pyramid plot was implemented using ggplot2 and is part of `utils.R` and can easily be modified to re-use it in other projects
-
-* The basic idea was to plot to different bar plots at the same time (Don't run example below)
+* The pyramid plot was implemented using ggplot2 and is part of `utils.R`
+* It can easily be modified for re-use in other projects
+* The basic idea was two plot to different bar plots at the same time (Don't run example below)
 
 
 
