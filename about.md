@@ -4,7 +4,7 @@ This Shiny app is a re-engineered version of the [Syria Regional Refugee Respons
 
 It uses up-to-date R technology and R packages which are not yet available on CRAN like, for instance, Hadley Wickham's [tidyr package](https://github.com/hadley/tidyr) or Joe Cheng's [leaflet package](https://github.com/jcheng5/leaflet-shiny).
 
-Most of the heavy lifting is done by functions defined in utils.R which is also part of the app's repo. Part of this functionality is the follwing:
+Most of the heavy lifting is done by functions defined in utils.R which is also part of the app's repo. Part of this functionality is the following:
 
 * Downloading data using the United Nations JSON API
 * Tidying and processing the data
