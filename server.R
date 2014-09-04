@@ -3,6 +3,7 @@
 
 library(shiny)
 library(yaml)
+library(leaflet)
 
 source('rScripts/utils.R')
 config <- yaml.load_file('config.yml')
