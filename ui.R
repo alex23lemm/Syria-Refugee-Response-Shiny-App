@@ -1,5 +1,6 @@
 library(shiny)
 library(leaflet)
+library(markdown)
 
 shinyUI(navbarPage('Syria Regional Refugee Response',
                                
