@@ -12,7 +12,7 @@ Most of the heavy lifting is done by functions defined in utils.R which is also 
 
 ## Source Code
 
-The app's repo can be found on GitHub [here](https://github.com/alex23lemm/Syria-Refugee-Response-Shiny-App). In addition, you may want to check out the [project specific web page](http://alex23lemm.github.io/Syria-Refugee-Response-Shiny-App)(Also on GitHub).
+The app's repo can be found on GitHub [here](https://github.com/alex23lemm/Syria-Refugee-Response-Shiny-App). In addition, you may want to check out the [project specific web page](http://alex23lemm.github.io/Syria-Refugee-Response-Shiny-App) (Also on GitHub).
 
 
 ## Contact
