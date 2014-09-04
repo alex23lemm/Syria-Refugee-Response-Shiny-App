@@ -6,7 +6,7 @@ It uses up-to-date R technology and R packages which are not yet available on CR
 
 Most of the heavy lifting is done by functions defined in utils.R which is also included in the app's repo. Part of this functionality is the following:
 
-* Downloading data using the United Nations JSON API
+* Downloading data using the United Nations REST API
 * Tidying and processing the data
 * Creating the pyramid plot for visualizing demographic data
 
