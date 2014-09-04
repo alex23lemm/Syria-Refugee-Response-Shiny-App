@@ -22,9 +22,10 @@ If you want to run the app locally on your machine, make sure to install at leas
 * RColorBrewer
 * markdown
 
-`leaflet` needs to be installed via `devtools`:
+`leaflet` and `tidyr` needs to be installed via `devtools`:
 
     devtools::install_github("jcheng5/leaflet-shiny")
+    devtools::install_github("hadley/tidyr")
 
 After installing the prerequisites, download the entire content of the repo and store it in a folder of your choice. Assuming that the new folder will be your R working directory, use the `runApp` command to launch the app. 
 
