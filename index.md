@@ -40,8 +40,8 @@ Re-engineered Shiny app:
 
 ## One feature in more detail
 
-* The pyramid plot was implemented using ggplot2 and is part of `utils.R` and can easily be modified to re-use it in other projects
-* The basic idea was two plot to different bar plots at the same time and multiply the underlying y-values of one of them by -1 (Don't run example below)
+* The pyramid plot was implemented using ggplot2 and is part of `utils.R`. It can easily be modified for re-use in other projects
+* The basic idea was to plot two different bar plots at the same time and multiply the underlying y-values of one of them by -1 (Don't run example below)
 
 
 
