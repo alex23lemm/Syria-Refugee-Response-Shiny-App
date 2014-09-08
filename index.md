@@ -32,17 +32,16 @@ Re-engineered Shiny app:
 
 * __Increased perception__ : Covers an important world topic from a data perspective
 * __Up-to-date R technology__: Uses a bunch of packages from the 'Hadleyverse' (`dplyr`, `tidyr`, `ggplot2`) and other modern libraries like `jsonlite` and `leaflet`
-* __Most current data__: Refreshes the data any time you want by leveraging the United Nations JSON API
+* __Most current data__: Refreshes the data any time you want by leveraging the United Nations REST API
 * __Visualizes demographic data__: Provides a light-weight ggplot2-based pyramid plot which can be re-used in other projects
-* __Easily extendible:__ Although overall country data is accessible via the UI, all backend functionality to retrieve regional data is already implemented
+* __Easily extendible:__ Although only overall country data is accessible via the UI, all backend functionality to retrieve regional data is already implemented
 
 ---
 
 ## One feature in more detail
 
-* The pyramid plot was implemented using ggplot2 and is part of `utils.R`
-* It can easily be modified for re-use in other projects
-* The basic idea was two plot to different bar plots at the same time (Don't run example below)
+* The pyramid plot was implemented using ggplot2 and is part of `utils.R` and can easily be modified to re-use it in other projects
+* The basic idea was two plot to different bar plots at the same time and multiply the underlying y-values of one of them by -1 (Don't run example below)
 
 
 
@@ -71,6 +70,6 @@ limits = c((y_max * -1) - 1, y_max + 1))
 ### What are the current issues?
 
 * Joe Cheng's `leaflet` package lacks documenation and was very hard to use the first time
-* The current data retrieval process does not include exception handling: Currently, the app relies on the fact that the United Nations severs are up 24/7  
+* The data retrieval process does not include exception handling yet: Currently, the app relies on the fact that the United Nations severs are up 24/7  
 
 

@@ -71,9 +71,9 @@
     <ul>
 <li><strong>Increased perception</strong> : Covers an important world topic from a data perspective</li>
 <li><strong>Up-to-date R technology</strong>: Uses a bunch of packages from the &#39;Hadleyverse&#39; (<code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>) and other modern libraries like <code>jsonlite</code> and <code>leaflet</code></li>
-<li><strong>Most current data</strong>: Refreshes the data any time you want by leveraging the United Nations JSON API</li>
+<li><strong>Most current data</strong>: Refreshes the data any time you want by leveraging the United Nations REST API</li>
 <li><strong>Visualizes demographic data</strong>: Provides a light-weight ggplot2-based pyramid plot which can be re-used in other projects</li>
-<li><strong>Easily extendible:</strong> Although overall country data is accessible via the UI, all backend functionality to retrieve regional data is already implemented</li>
+<li><strong>Easily extendible:</strong> Although only overall country data is accessible via the UI, all backend functionality to retrieve regional data is already implemented</li>
 </ul>
 
   </article>
@@ -86,9 +86,8 @@
   </hgroup>
   <article data-timings="">
     <ul>
-<li>The pyramid plot was implemented using ggplot2 and is part of <code>utils.R</code></li>
-<li>It can easily be modified for re-use in other projects</li>
-<li>The basic idea was two plot to different bar plots at the same time (Don&#39;t run example below)</li>
+<li>The pyramid plot was implemented using ggplot2 and is part of <code>utils.R</code> and can easily be modified to re-use it in other projects</li>
+<li>The basic idea was two plot to different bar plots at the same time and multiply the underlying y-values of one of them by -1 (Don&#39;t run example below)</li>
 </ul>
 
 <pre><code class="r">demographic_data &lt;- demographic_data %&gt;% filter(name == country_name)  
@@ -123,7 +122,7 @@ limits = c((y_max * -1) - 1, y_max + 1))
 
 <ul>
 <li>Joe Cheng&#39;s <code>leaflet</code> package lacks documenation and was very hard to use the first time</li>
-<li>The current data retrieval process does not include exception handling: Currently, the app relies on the fact that the United Nations severs are up 24/7<br></li>
+<li>The data retrieval process does not include exception handling yet: Currently, the app relies on the fact that the United Nations severs are up 24/7<br></li>
 </ul>
 
   </article>
