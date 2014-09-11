@@ -66,9 +66,9 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
 }
 
 
-tidy_demographic_data <- function(demographic_data) {
+tidy_demographic_data <- function(processed_population_data) {
   
-  demographic_data <- demographic_data %>% 
+  demographic_data <- processed_population_data %>% 
     select(name, ends_with('M'), ends_with('F')) %>%
     gather(age, numb_of_persons, -name) %>% 
     separate(age, into = c('age', 'gender'), sep = -2) %>%
