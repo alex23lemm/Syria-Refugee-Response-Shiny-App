@@ -4,6 +4,8 @@ Re-engineered version of the [Syria Regional Refugee Response Portal](http://dat
 
 The version of the app residing in the master branch was deployed to [ShinyApps.io](https://www.shinyapps.io/) and can be accessed [here](http://bit.ly/1omK3gb).
 
+You may also want to visit the project-specific web page (gh-pages branch) [here](http://alex23lemm.github.io/Syria-Refugee-Response-Shiny-App/).
+
 
 ## Installation
 
@@ -22,7 +24,7 @@ If you want to run the app locally on your machine, make sure to install at leas
 * RColorBrewer
 * markdown
 
-`leaflet` and `tidyr` needs to be installed via `devtools`:
+`leaflet` and `tidyr` need to be installed via `devtools`:
 
     devtools::install_github("jcheng5/leaflet-shiny")
     devtools::install_github("hadley/tidyr")
