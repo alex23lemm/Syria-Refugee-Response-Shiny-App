@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, label, p, div {
   /* Fade out while not hovering */
   opacity: 0.65;
   zoom: 0.9;
-  transition: opacity 500ms 1s;
+  transition: opacity 500ms 50ms;
 }
 
 #controls:hover {
