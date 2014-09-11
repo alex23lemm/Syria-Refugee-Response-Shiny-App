@@ -1,9 +1,16 @@
+
+# Load libraries ---------------------------------------------------------------
+
 library(shiny)
-library(leaflet)
 library(markdown)
+library(leaflet)
+
+
 
 shinyUI(navbarPage('Syria Regional Refugee Response',
-                               
+    
+# First tab --------------------------------------------------------------------                   
+
   tabPanel('Regional Overview',
            
     includeCSS('style.css'), 
@@ -22,19 +29,16 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
                   top = 60, left = "auto", right = 20, bottom = "auto",
                   width = 280, height = "auto",
                   
-      h3("Instructions"),
+      h3("Instructions (Move here)"),
       p('This Shiny app provides basic visualizations and summary stats about 
         the current Syrian refugee crisis.'),
-      p('Clicking on one of the circles will show you country-specific data below. The bigger
-        the circle radius the more refugees are residing in the respecitve country. If you
-        would like to get back to the general view of the entire region, just click on a 
-        non-circle area.'), 
-      p('This app comes with a pre-installed data set. Clicking the button on the left will
-        download new data from the United Nations servers.')
+      p('Clicking on one of the circles will show you country-specific data below. 
+         The bigger the circle radius the more refugees are residing in the 
+         respecitve country. If you would like to get back to the general view 
+         of the entire region, just click on a non-circle area.'), 
+      p('This app comes with a pre-installed data set. Clicking the button on 
+         the left will download new data from the United Nations servers.')
     ),
-    
-    
-    
     
      fluidRow(
        column(8, offset = 3,
@@ -47,13 +51,14 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
     
     fluidRow(
       column(3,
-             p(tags$i(class = 'icon-time'), 'Data last updated on:', textOutput('date')),
+             p(tags$i(class = 'icon-time'), 'Data last updated on:', 
+               textOutput('date')),
              br(),
              actionButton('downloadButton', 'Refresh data', 
                           icon("cloud-download")),
-             helpText('Info: Clicking the button will download new data 
-                      from the United Nations servers to the Shiny server for the active
-                      user session.')
+             helpText('Info: Clicking the button will download new data from the
+                       United Nations servers to the Shiny server for the active
+                       user session.')
              
       ),
       
@@ -70,11 +75,10 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
         h4(textOutput('pyramidPlotLabel')),
         plotOutput('pyramidPlot',  width='100%', height='250px')
       )
-    )
-    
-
-    
+    )  
   ),
+  
+# Second tab -------------------------------------------------------------------  
   
   tabPanel('About',
     fluidRow(
@@ -86,10 +90,6 @@ shinyUI(navbarPage('Syria Regional Refugee Response',
     fluidRow(
       column(6, offset = 2,
              includeMarkdown('about.md'))
-      )
-           
-           
-    
-  )
-     
-  ))
+    )  
+  )    
+))
