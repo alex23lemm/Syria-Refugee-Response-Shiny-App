@@ -7,7 +7,7 @@ library(leaflet)
 
 
 
-shinyUI(navbarPage('Syria Regional Refugee Response',
+shinyUI(navbarPage('Syria Refugee Dashboard',
     
 # First tab --------------------------------------------------------------------                   
 
