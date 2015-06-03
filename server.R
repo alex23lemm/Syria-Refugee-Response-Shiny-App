@@ -83,7 +83,11 @@ shinyServer(function(input, output, session) {
   
   
   output$pyramidPlot <- renderPlot({
-    create_pyramid_plot(demographic_data, selectedCountry)
+    pyramidPlot <- try(create_pyramid_plot(demographic_data, selectedCountry))
+    shiny::validate(
+     need(pyramidPlot, "No demographic data available for this region")
+    )
+    pyramidPlot
   })
   
   

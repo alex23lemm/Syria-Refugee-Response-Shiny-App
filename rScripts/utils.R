@@ -105,8 +105,7 @@ create_pyramid_plot <- function(demographic_data, country_name) {
   
   y_max <- max(demographic_data$percent) %>% round_any(10, f = ceiling)
   
-  g <- try(
-    ggplot(demographic_data, aes(age, percent, fill = gender)) +
+  g <- ggplot(demographic_data, aes(age, percent, fill = gender)) +
     geom_bar(data = filter(demographic_data, gender == 'M'), stat = 'identity',
              width = 0.6, position = position_dodge(width = 0.5)) +
     geom_bar(aes(y = percent * -1), filter(demographic_data, gender == 'F'), 
@@ -126,9 +125,7 @@ create_pyramid_plot <- function(demographic_data, country_name) {
                        limits = c((y_max * -1) - 1, y_max + 1)) +
     theme(
       panel.grid.major = element_blank()
-      ), 
-    silent = TRUE
-  )
+      )
   
   return(g)
 }
