@@ -7,19 +7,22 @@ library(leaflet)
 
 
 
-shinyUI(navbarPage('Syria Refugee Dashboard',
+shinyUI(navbarPage('Syria Refugee Dashboard', 
+                   header = list(
+                     tags$head(includeCSS('style.css')),
+                     tags$head(includeScript("google-analytics.js"))
+                     ),
+                    
     
 # First tab --------------------------------------------------------------------                   
 
   tabPanel('Regional Overview',
-           
-    includeCSS('style.css'), 
-           
+                  
     leafletMap(
-      "map", width="100%", height="400px",
+      "map", width = "100%", height = "400px",
       initialTileLayer = "http://a.tiles.mapbox.com/v3/unhcr.map-8bkai3wa/{z}/{x}/{y}.png",    
       initialTileLayerAttribution = HTML('Maps by <a href="http://www.mapbox.com/">Mapbox</a>'),
-      options=list(
+      options = list(
         center = c(34.398, 40.649),
         zoom = 5
       )
@@ -73,7 +76,7 @@ shinyUI(navbarPage('Syria Refugee Dashboard',
       
       column(5,
         h4(textOutput('pyramidPlotLabel')),
-        plotOutput('pyramidPlot',  width='100%', height='250px')
+        plotOutput('pyramidPlot',  width = '100%', height = '250px')
       )
     )  
   ),
@@ -83,7 +86,8 @@ shinyUI(navbarPage('Syria Refugee Dashboard',
   tabPanel('About',
     fluidRow(
       column(5, offset = 5,
-             img(src = 'all_logos.png', height = 300, width = 300)
+             img(src = 'all_logos.png', class = "img-responsive",
+                 height = 300, width = 300)
              )
       
       ),
