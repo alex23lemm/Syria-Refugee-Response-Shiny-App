@@ -33,9 +33,21 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   row_index <- ifelse(regions, 1, 2)
   
   demography <- sapply(raw_data$population,
-                       function(e) unlist(e[['demography']][row_index, ])) %>%
-    t %>%  apply(2, as.numeric)
-      
+                       function(e) e[['demography']][row_index, ]) 
+  
+  # Make code more robut because demographic data might not be provided for 
+  # every region
+  placeholder <- data.frame(matrix(data = rep(NA, 10), ncol = 10))
+  names(placeholder) <- c("04M",  "04F",  "511M",  "511F", "1217M", "1217F",
+                          "1859M",  "1859F",  "60M",  "60F")
+  
+  for(i in seq_along(demography)) {
+    if(is.null(demography[[i]]))
+      demography[[i]] <- placeholder
+  }
+  
+  demography <- rbind.fill(demography) %>% colwise(as.numeric)(.)
+  
   processed_data <- raw_data %>% 
     select(if(regions) country, name, latitude, longitude) %>%
     mutate(
@@ -49,8 +61,9 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   
   processed_data <- cbind(processed_data, demography)
   
-  if(regions)
+  if(regions) {
     processed_data <- filter(processed_data, country != name)
+  }
   
   summary_data <- data.frame(name="Entire Region", 
                              t(colSums(processed_data[,-1], na.rm = TRUE)),
@@ -89,14 +102,16 @@ tidy_demographic_data <- function(processed_population_data) {
 create_pyramid_plot <- function(demographic_data, country_name) {
   
   demographic_data <- demographic_data %>% filter(name == country_name)
+  
   y_max <- max(demographic_data$percent) %>% round_any(10, f = ceiling)
   
-  
-  g <- ggplot(demographic_data, aes(age, percent, fill = gender)) +
+  g <- try(
+    ggplot(demographic_data, aes(age, percent, fill = gender)) +
     geom_bar(data = filter(demographic_data, gender == 'M'), stat = 'identity',
-             width = 0.6, position = position_dodge(width=0.5)) +
+             width = 0.6, position = position_dodge(width = 0.5)) +
     geom_bar(aes(y = percent * -1), filter(demographic_data, gender == 'F'), 
-             stat = 'identity', width = 0.6, position = position_dodge(width=0.5)) +
+             stat = 'identity', width = 0.6, 
+             position = position_dodge(width = 0.5)) +
     geom_text(aes(label = paste(percent, "%")), hjust = -0.1, size = 3,
               filter(demographic_data, gender == 'M')) +
     geom_text(aes(label = paste(percent, "%"), y = percent * -1), hjust = 1.1,
@@ -111,7 +126,9 @@ create_pyramid_plot <- function(demographic_data, country_name) {
                        limits = c((y_max * -1) - 1, y_max + 1)) +
     theme(
       panel.grid.major = element_blank()
-      )
+      ), 
+    silent = TRUE
+  )
   
   return(g)
 }
