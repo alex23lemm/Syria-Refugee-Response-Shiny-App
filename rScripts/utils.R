@@ -35,37 +35,43 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   demography <- sapply(raw_data$population,
                        function(e) e[['demography']][row_index, ]) 
   
-  # Make code more robut because demographic data might not be provided for 
-  # every region
+  # Demographic data might not be provided for every country/region
+  # We need to account for that fact and add dummy data (NAs) if necessary
   placeholder <- data.frame(matrix(data = rep(NA, 10), ncol = 10))
   names(placeholder) <- c("04M",  "04F",  "511M",  "511F", "1217M", "1217F",
                           "1859M",  "1859F",  "60M",  "60F")
   
-  for(i in seq_along(demography)) {
-    if(is.null(demography[[i]]))
+  for (i in seq_along(demography)) {
+    if (is.null(demography[[i]]))
       demography[[i]] <- placeholder
   }
   
   demography <- rbind.fill(demography) %>% colwise(as.numeric)(.)
   
+   if (regions) {
+     columns <- list(~country, ~name, ~latitude, ~longitude)
+   } else {
+     columns <- list(~name, ~latitude, ~longitude)
+   }
+  
   processed_data <- raw_data %>% 
-    select(if(regions) country, name, latitude, longitude) %>%
+    select_(.dots = columns) %>%
     mutate(
       latitude = as.numeric(latitude),
       longitude = as.numeric(longitude),
       people_of_concern,
       registered_syrian_refugees,
-      persons_awaiting_registration,
+      persons_awaiting_registration ,
       radius = round(people_of_concern / sum(people_of_concern) * 600000)
-    ) 
+    )
   
   processed_data <- cbind(processed_data, demography)
   
-  if(regions) {
+  if (regions) {
     processed_data <- filter(processed_data, country != name)
   }
   
-  summary_data <- data.frame(name="Entire Region", 
+  summary_data <- data.frame(name = "Entire Region", 
                              t(colSums(processed_data[,-1], na.rm = TRUE)),
                                         stringsAsFactors = FALSE)
   names(summary_data) <- names(processed_data)
@@ -74,7 +80,6 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   
   processed_data <- rbind(processed_data, summary_data)
 
-     
   return(processed_data) 
 }
 
