@@ -9,8 +9,7 @@ library(leaflet)
 
 shinyUI(navbarPage('Syria Refugee Dashboard', 
                    header = list(
-                     tags$head(includeCSS('style.css')),
-                     tags$head(includeScript("google-analytics.js"))
+                     tags$head(includeCSS('style.css'))
                      ),
                     
     
