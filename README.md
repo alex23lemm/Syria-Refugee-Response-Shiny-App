@@ -41,7 +41,7 @@ If you do not want to download the entire repo content yourself, you can use the
     library(shiny)
     runGitHub('Syria-Refugee-Response-Shiny-App', 'alex23lemm')
     
-### Installation on Ubunutu server
+### Installation on Ubuntu server
 
 If you would like to install the application on an Ubuntu server instance (e.g. a T2.micro Amazon EC2 instance) you can excute the bash script `setup.sh` that is part of this repo. The script will install the following:
 
