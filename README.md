@@ -9,6 +9,8 @@ You may also want to visit the project-specific web page (gh-pages branch) [here
 
 ## Installation
 
+### Installation on local machine
+
 If you want to run the app locally on your machine, make sure to install at least `R version 3.1.1` and the following libraries:
 
 * devtools
@@ -38,3 +40,23 @@ If you do not want to download the entire repo content yourself, you can use the
 
     library(shiny)
     runGitHub('Syria-Refugee-Response-Shiny-App', 'alex23lemm')
+    
+### Installation on Ubunutu server
+
+If you would like to install the application on an Ubuntu server instance (e.g. a T2.micro Amazon EC2 instance) you can excute the bash script `setup.sh` that is part of this repo. The script will install the following:
+
+* Create and enable swap file: necessary when running on a T2.mirco EC2 instance. You won't be able to install certain R packages (e.g. `dplyr`, `tidyr`) without the additional allocated memory from the swap file
+* The latest R distribution for Ubuntu Trusty
+* Git
+* Shiny server
+* The devtools package including the necessary Linux packages
+* R GitHub packages necessary to run the Shiny app
+* R CRAN packages necessary to run the Shiny app
+* The Shiny app (via git clone)
+
+After running the script the Syria Refugee Dashboard app will be available at `http://[server IP address]:3838/Syria-Refugee-Response-Shiny-App`
+
+
+
+
+
