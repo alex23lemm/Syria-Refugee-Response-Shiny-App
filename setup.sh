@@ -31,7 +31,7 @@ sudo su - -c "R -e \"devtools::install_github('jcheng5/leaflet-shiny')\""
 sudo su - -c "R -e \"devtools::install_github('rstudio/shiny@v0.10.2.2')\""
 
 # Install CRAN R packages
-sudo su - -c "R -e \"install.packages(c('yaml','jsonlite','plyr','dplyr','tidyr','ggplot2','RColorBrewer','markdown'), repos='https://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages(c('yaml','jsonlite','curl','plyr','dplyr','tidyr','ggplot2','RColorBrewer','markdown'), repos='https://cran.rstudio.com/')\""
 
 # Install shiny app
 sudo git clone https://github.com/alex23lemm/Syria-Refugee-Response-Shiny-App.git

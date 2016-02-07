@@ -1,6 +1,7 @@
 # Load libraries ---------------------------------------------------------------
 
 library(jsonlite)
+library(curl)
 library(plyr)
 library(dplyr)
 library(tidyr)

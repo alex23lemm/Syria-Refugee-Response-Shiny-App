@@ -18,6 +18,7 @@ If you want to run the app locally on your machine, make sure to install at leas
 * shiny
 * yaml
 * jsonlite
+* curl
 * plyr
 * dplyr
 * tidyr
@@ -31,7 +32,7 @@ It is important to install `leaflet` and `shiny` via `devtools` in order to use 
     devtools::install_github('rstudio/shiny@v0.10.2.2')
 
 
-After installing the prerequisites, download the entire content of the repo and store it in a folder of your choice. Assuming that the new folder will be your R working directory, use the `runApp` command to launch the app. 
+After installing the prerequisites, download or git clone the entire content of the repo and store it in a folder of your choice. Assuming that the new folder will be your R working directory, use the `runApp` command to launch the app. 
 
     library(shiny)
     runApp('.')
