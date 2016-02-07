@@ -31,21 +31,9 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   # as expected
   row_index <- ifelse(regions, 1, 2)
   
-  demography <- sapply(raw_data$population,
-                       function(e) e[['demography']][row_index, ]) 
-  
-  # Demographic data might not be provided for every country/region
-  # We need to account for that fact and add dummy data (NAs) if necessary
-  placeholder <- data.frame(matrix(data = rep(NA, 10), ncol = 10))
-  names(placeholder) <- c("04M",  "04F",  "511M",  "511F", "1217M", "1217F",
-                          "1859M",  "1859F",  "60M",  "60F")
-  
-  for (i in seq_along(demography)) {
-    if (is.null(demography[[i]]))
-      demography[[i]] <- placeholder
-  }
-  
-  demography <- rbind.fill(demography) %>% colwise(as.numeric)(.)
+  demography <- ldply(raw_data$population,
+         function(e) e$demography[row_index, ]) %>% 
+    colwise(as.numeric)(.)
   
    if (regions) {
      columns <- list(~country, ~name, ~latitude, ~longitude)
@@ -72,8 +60,8 @@ get_UNHCR_population_data <- function(url, regions = FALSE) {
   
   summary_data <- data.frame(name = "Entire Region", 
                              t(colSums(processed_data[,-1], na.rm = TRUE)),
-                                        stringsAsFactors = FALSE)
-  names(summary_data) <- names(processed_data)
+                             stringsAsFactors = FALSE,
+                             check.names = FALSE)
   summary_data$latitude <- NA
   summary_data$longitude <- NA
   
